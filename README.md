@@ -26,5 +26,5 @@
 
 <br>
 
-## Github repo languages
+## Github Projects Languages
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=0DarkPhoenix&theme=github_dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact)
