@@ -1,16 +1,18 @@
 # Projects:
 
-## VS Code Extensions
-https://marketplace.visualstudio.com/manage/publishers/DarkPhoenix
+### [VS Code Extensions](https://marketplace.visualstudio.com/manage/publishers/DarkPhoenix)
 
-## NPM packages
-https://www.npmjs.com/~dark_phoenix_
 
-## Modrinth (Datapack and Resource packs)
-https://modrinth.com/user/dark_phoenix_
+### [NPM packages](https://www.npmjs.com/~dark_phoenix_)
 
-## Galaxy Life Notifier
-https://github.com/0DarkPhoenix/Galaxy-Life-Notifier
+
+### [Modrinth](https://modrinth.com/user/dark_phoenix_)
+
+
+### [Galaxy Life Notifier](https://github.com/0DarkPhoenix/Galaxy-Life-Notifier)
+
+
+<br>
 
 # Experience
 ## Frontend
