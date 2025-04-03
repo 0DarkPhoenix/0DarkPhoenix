@@ -9,13 +9,10 @@
 ### [Modrinth](https://modrinth.com/user/dark_phoenix_) ![Modrinth Badge](https://img.shields.io/badge/Modrinth-00AF5C?logo=modrinth&logoColor=fff&style=for-the-badge)
 
 ### [Galaxy Life Notifier](https://github.com/0DarkPhoenix/Galaxy-Life-Notifier) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-
 <br>
 
 ## Github Projects Languages
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=0DarkPhoenix&theme=github_dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact)
-
-<br>
 
 # Experience
 ## Frontend
