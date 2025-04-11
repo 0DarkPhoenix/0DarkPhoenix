@@ -6,7 +6,7 @@
 
 ### [Fibonacci Sequence Calculator](https://github.com/0DarkPhoenix/fibonacci_sequence) ![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
 
-### [Modrinth](https://modrinth.com/user/dark_phoenix_) ![Modrinth Badge](https://img.shields.io/badge/Modrinth-00AF5C?logo=modrinth&logoColor=fff&style=for-the-badge)
+### [Modrinth](https://modrinth.com/user/dark_phoenix_) ![Modrinth Badge](https://img.shields.io/badge/Modrinth-00AF5C?logo=modrinth&logoColor=fff&style=for-the-badge) ![Modrinth Projects](https://img.shields.io/badge/dynamic/json?color=5da545&label=Projects%20Count&query=modrinth.projects&url=https://raw.githubusercontent.com/0DarkPhoenix/0DarkPhoenix/main/shields/downloads.json&style=for-the-badge) ![Modrinth Downloads](https://img.shields.io/badge/dynamic/json?color=5da545&label=Total%20Downloads&query=modrinth.downloads&url=https://raw.githubusercontent.com/0DarkPhoenix/0DarkPhoenix/main/shields/downloads.json&suffix=%20downloads&style=for-the-badge)
 
 ### [Galaxy Life Notifier](https://github.com/0DarkPhoenix/Galaxy-Life-Notifier) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 <br>
@@ -21,6 +21,6 @@
 ## Backend
 ![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 
-## Miscelanious
+## Miscellaneous
 ![Tauri](https://img.shields.io/badge/tauri-%2324C8DB.svg?style=for-the-badge&logo=tauri&logoColor=%23FFFFFF) ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white) ![JSON Badge](https://img.shields.io/badge/JSON-000?logo=json&logoColor=fff&style=for-the-badge) ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
 
