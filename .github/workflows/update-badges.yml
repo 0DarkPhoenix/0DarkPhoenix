@@ -18,6 +18,9 @@ jobs:
       
       - name: Install dependencies
         run: npm install axios
+
+      - name: Fetch and update Visual Studio Code Extensions badges
+        run: node .github/scripts/fetch-visual-studio-marketplace-projects.js
       
       - name: Fetch and update Modrinth badges
         run: node .github/scripts/fetch-modrinth-projects.js
