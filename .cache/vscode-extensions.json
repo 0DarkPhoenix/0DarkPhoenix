@@ -1,0 +1,16 @@
+{
+  "repositories": {
+    "0DarkPhoenix": null,
+    "codebee-tools": "codebee-tools",
+    "dark-modern-darker": "dark-modern-darker",
+    "debian-changelog-item-creator": "debian-changelog-item-creator",
+    "f-string-converter-plus": "f-string-converter-plus",
+    "i18n-tools": "i18n-tools-international",
+    "quick-fix-helper": "quick-fix-helper",
+    "relativedelta-npm": null,
+    "select-pasted-text": "select-pasted-text",
+    "split-mui-imports": "split-mui-imports",
+    "template-string-formatter": "template-string-formatter-plus"
+  },
+  "lastUpdated": "2025-04-12T19:05:52.472Z"
+}

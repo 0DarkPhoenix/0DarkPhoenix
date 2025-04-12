@@ -24,6 +24,9 @@ jobs:
       
       - name: Fetch and update Modrinth badges
         run: node .github/scripts/fetch-modrinth-projects.js
+
+      - name: Fetch NPM packages
+        run: node .github/scripts/fetch-npm-packages.js
       
       - name: Commit and push if changed
         run: |
