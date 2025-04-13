@@ -2,7 +2,7 @@ name: Update Extension Downloads
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Run every day at midnight
+    - cron: '0 3 * * *'  # Run every day at 03:00 UTC
   workflow_dispatch:  # Allow manual triggering
 
 jobs:
