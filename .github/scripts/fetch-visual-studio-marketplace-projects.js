@@ -110,10 +110,11 @@ async function fetchGitHubVSCodeExtensions() {
 								`Found new VS Code extension: ${packageJson.name} in repo ${repo.name}`,
 							);
 							// Add to cache
-							repositoriesCache[repo.name] = {
-								type: CACHE_TYPES.VSCODE,
-								id: packageJson.name,
-							};
+							updateRepositoryCache(
+								repo.name,
+								CACHE_TYPES.VSCODE,
+								packageJson.name,
+							);
 							// Add to our list if not already there
 							if (!cachedExtensionIds.includes(packageJson.name)) {
 								cachedExtensionIds.push(packageJson.name);
@@ -122,10 +123,7 @@ async function fetchGitHubVSCodeExtensions() {
 					} else {
 						// Mark as not a VS Code extension in cache if not already marked as something else
 						if (!repositoriesCache[repo.name]) {
-							repositoriesCache[repo.name] = {
-								type: CACHE_TYPES.VSCODE,
-								id: null,
-							};
+							updateRepositoryCache(repo.name, CACHE_TYPES.VSCODE, null);
 						}
 					}
 				} catch (error) {
@@ -149,12 +147,6 @@ async function fetchGitHubVSCodeExtensions() {
 					}
 				}
 			}
-
-			// Update the cache
-			cache.repositories = repositoriesCache;
-			cache.lastUpdated = new Date().toISOString();
-
-			saveSharedCache(cache);
 		}
 
 		// Filter out any null values and get just the extension IDs

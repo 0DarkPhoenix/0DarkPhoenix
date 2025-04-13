@@ -45,3 +45,36 @@ export function saveSharedCache(cacheData) {
 		console.error("Error saving shared cache:", error.message);
 	}
 }
+
+// Add this new function to cache-utils.js
+export function updateRepositoryCache(repoName, type, id) {
+	const cache = loadSharedCache();
+
+	// Create repositories object if it doesn't exist
+	if (!cache.repositories) {
+		cache.repositories = {};
+	}
+
+	// Only update if not already set or if we have a new ID
+	if (
+		!cache.repositories[repoName] ||
+		cache.repositories[repoName].type !== type ||
+		cache.repositories[repoName].id !== id
+	) {
+		// Preserve the existing object but update only relevant properties
+		cache.repositories[repoName] = {
+			...(cache.repositories[repoName] || {}),
+			type,
+			id,
+		};
+
+		// Update timestamp
+		cache.lastUpdated = new Date().toISOString();
+
+		// Save the updated cache
+		saveSharedCache(cache);
+		return true; // Indicate cache was updated
+	}
+
+	return false; // Indicate no change was needed
+}

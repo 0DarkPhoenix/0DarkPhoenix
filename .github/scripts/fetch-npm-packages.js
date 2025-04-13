@@ -6,6 +6,7 @@ import {
 	CACHE_TYPES,
 	loadSharedCache,
 	saveSharedCache,
+	updateRepositoryCache,
 } from "./shared/cache-utils.js";
 
 // Get current file's directory in ES modules
@@ -89,12 +90,10 @@ async function fetchGitHubNpmPackages() {
 					// First check if it has a name and is not private
 					if (packageJson.name && !packageJson.private) {
 						// Now check if .npmignore exists - required to be considered an npm package
-						let hasNpmIgnore = false;
 						try {
 							await axios.get(
 								`https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/contents/.npmignore`,
 							);
-							hasNpmIgnore = true;
 							console.log(`Found .npmignore file in repo ${repo.name}`);
 
 							// Only add to the package map if it has BOTH valid package.json AND .npmignore
@@ -102,14 +101,18 @@ async function fetchGitHubNpmPackages() {
 								`Found valid NPM package: ${packageJson.name} in repo ${repo.name} (with .npmignore)`,
 							);
 							// Add to cache
-							repositoriesCache[repo.name] = {
-								type: CACHE_TYPES.NPM,
-								id: packageJson.name,
-							};
+							updateRepositoryCache(
+								repo.name,
+								CACHE_TYPES.NPM,
+								packageJson.name,
+							);
 							// Add to our list if not already there
 							if (!cachedPackageNames.includes(packageJson.name)) {
 								cachedPackageNames.push(packageJson.name);
 							}
+
+							// Go to the next repo
+							continue;
 						} catch (npmIgnoreError) {
 							// .npmignore doesn't exist, so it's not considered an npm package
 							if (
@@ -119,19 +122,13 @@ async function fetchGitHubNpmPackages() {
 								console.log(
 									`No .npmignore found in repo ${repo.name}, not considering it as an npm package`,
 								);
-								// Mark as not an NPM package in cache
-								repositoriesCache[repo.name] = {
-									type: CACHE_TYPES.NPM,
-									id: null,
-								};
 							}
 						}
-					} else {
-						// Mark as not an NPM package in cache
-						repositoriesCache[repo.name] = {
-							type: CACHE_TYPES.NPM,
-							id: null,
-						};
+					}
+
+					// Mark as not an NPM package in cache
+					if (!repositoriesCache[repo.name]) {
+						updateRepositoryCache(repo.name, CACHE_TYPES.NPM, null);
 					}
 				} catch (error) {
 					// Check the HTTP status code from the error response
@@ -154,11 +151,6 @@ async function fetchGitHubNpmPackages() {
 					}
 				}
 			}
-
-			// Update the cache
-			cache.repositories = repositoriesCache;
-			cache.lastUpdated = new Date().toISOString();
-			saveSharedCache(cache);
 		}
 
 		// Filter out any null values and get just the package names
