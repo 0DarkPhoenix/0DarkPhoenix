@@ -2,19 +2,22 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import axios from "axios";
+import {
+	CACHE_TYPES,
+	loadSharedCache,
+	saveSharedCache,
+} from "./shared/cache-utils.js";
 
 // Get current file's directory in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const githubToken = process.env.GITHUB_TOKEN;
+
 // Your VS Marketplace publisher name
 const VS_MARKETPLACE_PUBLISHER = "DarkPhoenix";
 // Your GitHub username
 const GITHUB_USERNAME = "0DarkPhoenix";
-
-// Path to the cache file
-const CACHE_DIR = join(__dirname, "../../.cache");
-const CACHE_FILE_PATH = join(CACHE_DIR, "vscode-extensions.json");
 
 // Fallback extension IDs in case all else fails
 const FALLBACK_EXTENSION_ID_ARRAY = [
@@ -29,47 +32,17 @@ const FALLBACK_EXTENSION_ID_ARRAY = [
 	"template-string-formatter-plus",
 ];
 
-// Load or initialize the extension cache
-function loadExtensionCache() {
-	// Ensure cache directory exists
-	if (!existsSync(CACHE_DIR)) {
-		mkdirSync(CACHE_DIR, { recursive: true });
-	}
-
-	if (existsSync(CACHE_FILE_PATH)) {
-		try {
-			const cacheData = readFileSync(CACHE_FILE_PATH, "utf8");
-			return JSON.parse(cacheData);
-		} catch (error) {
-			console.error("Error reading extension cache file:", error.message);
-			return { repositories: {} };
-		}
-	}
-
-	return { repositories: {} };
-}
-
-// Save the extension cache
-function saveExtensionCache(cacheData) {
-	try {
-		writeFileSync(CACHE_FILE_PATH, JSON.stringify(cacheData, null, 2));
-		console.log("Extension cache updated successfully");
-	} catch (error) {
-		console.error("Error saving extension cache:", error.message);
-	}
-}
-
 async function fetchGitHubVSCodeExtensions() {
 	try {
-		// Load the existing cache
-		const cache = loadExtensionCache();
-		const extensionMap = cache.repositories || {};
+		// Load the shared cache
+		const cache = loadSharedCache();
+		const repositoriesCache = cache.repositories || {};
 		const cachedExtensionIds = [];
 
 		// Collect extension IDs from cached data
-		for (const [repoName, extensionId] of Object.entries(extensionMap)) {
-			if (extensionId) {
-				cachedExtensionIds.push(extensionId);
+		for (const [repoName, repoData] of Object.entries(repositoriesCache)) {
+			if (repoData && repoData.type === CACHE_TYPES.VSCODE && repoData.id) {
+				cachedExtensionIds.push(repoData.id);
 			}
 		}
 
@@ -89,8 +62,7 @@ async function fetchGitHubVSCodeExtensions() {
 				{
 					headers: {
 						Accept: "application/vnd.github.v3+json",
-						// Add GitHub token if needed
-						// 'Authorization': 'token YOUR_GITHUB_TOKEN'
+						Authorization: `token ${githubToken}`,
 					},
 				},
 			);
@@ -100,10 +72,13 @@ async function fetchGitHubVSCodeExtensions() {
 
 			// Check each repo not already in cache
 			for (const repo of repos) {
-				// Skip if we already have this repo in our cache
-				if (extensionMap[repo.name]) {
+				// Skip if we already have this repo in our cache as a VS Code extension
+				if (
+					repositoriesCache[repo.name] &&
+					repositoriesCache[repo.name].type === CACHE_TYPES.VSCODE
+				) {
 					console.log(
-						`Using cached extension ID for ${repo.name}: ${extensionMap[repo.name]}`,
+						`Using cached extension ID for ${repo.name}: ${repositoriesCache[repo.name].id}`,
 					);
 					continue;
 				}
@@ -135,15 +110,23 @@ async function fetchGitHubVSCodeExtensions() {
 								`Found new VS Code extension: ${packageJson.name} in repo ${repo.name}`,
 							);
 							// Add to cache
-							extensionMap[repo.name] = packageJson.name;
+							repositoriesCache[repo.name] = {
+								type: CACHE_TYPES.VSCODE,
+								id: packageJson.name,
+							};
 							// Add to our list if not already there
 							if (!cachedExtensionIds.includes(packageJson.name)) {
 								cachedExtensionIds.push(packageJson.name);
 							}
 						}
 					} else {
-						// Mark as not a VS Code extension in cache
-						extensionMap[repo.name] = null;
+						// Mark as not a VS Code extension in cache if not already marked as something else
+						if (!repositoriesCache[repo.name]) {
+							repositoriesCache[repo.name] = {
+								type: CACHE_TYPES.VSCODE,
+								id: null,
+							};
+						}
 					}
 				} catch (error) {
 					// Check the HTTP status code from the error response
@@ -168,15 +151,18 @@ async function fetchGitHubVSCodeExtensions() {
 			}
 
 			// Update the cache
-			cache.repositories = extensionMap;
+			cache.repositories = repositoriesCache;
 			cache.lastUpdated = new Date().toISOString();
-			saveExtensionCache(cache);
+
+			saveSharedCache(cache);
 		}
 
 		// Filter out any null values and get just the extension IDs
-		const extensionIds = Object.values(extensionMap).filter(
-			(id) => id !== null,
-		);
+		const extensionIds = Object.values(repositoriesCache)
+			.filter(
+				(repo) => repo && repo.type === CACHE_TYPES.VSCODE && repo.id !== null,
+			)
+			.map((repo) => repo.id);
 
 		console.log(`Found ${extensionIds.length} VS Code extension IDs total`);
 		return extensionIds.length > 0 ? extensionIds : FALLBACK_EXTENSION_ID_ARRAY;
@@ -185,10 +171,12 @@ async function fetchGitHubVSCodeExtensions() {
 		console.log("Falling back to cached extension list or hardcoded list");
 
 		// Try to read from cache again
-		const cache = loadExtensionCache();
-		const cachedIds = Object.values(cache.repositories || {}).filter(
-			(id) => id !== null,
-		);
+		const cache = loadSharedCache();
+		const cachedIds = Object.values(cache.repositories || {})
+			.filter(
+				(repo) => repo && repo.type === CACHE_TYPES.VSCODE && repo.id !== null,
+			)
+			.map((repo) => repo.id);
 
 		return cachedIds.length > 0 ? cachedIds : FALLBACK_EXTENSION_ID_ARRAY;
 	}
@@ -279,7 +267,9 @@ async function fetchVSMarketplaceExtensions() {
 					totalDownloads += installs + updates;
 
 					console.log(
-						`${extension.displayName}: ${installs} installs, ${installs + updates} downloads`,
+						`${extension.displayName}: ${installs} installs, ${
+							installs + updates
+						} downloads`,
 					);
 				}
 			} else {

@@ -21,12 +21,18 @@ jobs:
 
       - name: Fetch and update Visual Studio Code Extensions badges
         run: node .github/scripts/fetch-visual-studio-marketplace-projects.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Fetch and update Modrinth badges
         run: node .github/scripts/fetch-modrinth-projects.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fetch NPM packages
         run: node .github/scripts/fetch-npm-packages.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Commit and push if changed
         run: |

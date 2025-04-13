@@ -2,68 +2,41 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import axios from "axios";
+import {
+	CACHE_TYPES,
+	loadSharedCache,
+	saveSharedCache,
+} from "./shared/cache-utils.js";
 
 // Get current file's directory in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+const githubToken = process.env.GITHUB_TOKEN;
 
 // Your NPM username
 const NPM_USERNAME = "darkphoenix";
 // Your GitHub username (for fetching repos)
 const GITHUB_USERNAME = "0DarkPhoenix";
 
-// Path to the cache file
-const CACHE_DIR = join(__dirname, "../../.cache");
-const CACHE_FILE_PATH = join(CACHE_DIR, "npm-packages.json");
-
 // Fallback package names in case all else fails
 const FALLBACK_PACKAGES = ["relativedelta"];
 
-// Load or initialize the package cache
-function loadPackageCache() {
-	// Ensure cache directory exists
-	if (!existsSync(CACHE_DIR)) {
-		mkdirSync(CACHE_DIR, { recursive: true });
-	}
-
-	if (existsSync(CACHE_FILE_PATH)) {
-		try {
-			const cacheData = readFileSync(CACHE_FILE_PATH, "utf8");
-			return JSON.parse(cacheData);
-		} catch (error) {
-			console.error("Error reading package cache file:", error.message);
-			return { repositories: {} };
-		}
-	}
-
-	return { repositories: {} };
-}
-
-// Save the package cache
-function savePackageCache(cacheData) {
-	try {
-		writeFileSync(CACHE_FILE_PATH, JSON.stringify(cacheData, null, 2));
-		console.log("Package cache updated successfully");
-	} catch (error) {
-		console.error("Error saving package cache:", error.message);
-	}
-}
-
 async function fetchGitHubNpmPackages() {
 	try {
-		// Load the existing cache
-		const cache = loadPackageCache();
-		const packageMap = cache.repositories || {};
+		// Load the shared cache
+		const cache = loadSharedCache();
+		const repositoriesCache = cache.repositories || {};
 		const cachedPackageNames = [];
 
-		// Collect package names from cached data
-		for (const [repoName, packageName] of Object.entries(packageMap)) {
-			if (packageName) {
-				cachedPackageNames.push(packageName);
+		// Collect npm package names from cached data
+		for (const [repoName, repoData] of Object.entries(repositoriesCache)) {
+			if (repoData && repoData.type === CACHE_TYPES.NPM && repoData.id) {
+				cachedPackageNames.push(repoData.id);
 			}
 		}
 
-		console.log(`Found ${cachedPackageNames.length} packages in cache`);
+		console.log(`Found ${cachedPackageNames.length} NPM packages in cache`);
 
 		// Check if we should fetch from GitHub
 		const shouldCheckGitHub = true; // You can add logic here to decide (e.g., based on time)
@@ -79,8 +52,7 @@ async function fetchGitHubNpmPackages() {
 				{
 					headers: {
 						Accept: "application/vnd.github.v3+json",
-						// Add GitHub token if needed
-						// 'Authorization': 'token YOUR_GITHUB_TOKEN'
+						Authorization: `token ${githubToken}`,
 					},
 				},
 			);
@@ -90,10 +62,13 @@ async function fetchGitHubNpmPackages() {
 
 			// Check each repo not already in cache
 			for (const repo of repos) {
-				// Skip if we already have this repo in our cache
-				if (packageMap[repo.name]) {
+				// Skip if we already have this repo in our cache as an NPM package
+				if (
+					repositoriesCache[repo.name] &&
+					repositoriesCache[repo.name].type === CACHE_TYPES.NPM
+				) {
 					console.log(
-						`Using cached package name for ${repo.name}: ${packageMap[repo.name]}`,
+						`Using cached package name for ${repo.name}: ${repositoriesCache[repo.name].id}`,
 					);
 					continue;
 				}
@@ -111,20 +86,52 @@ async function fetchGitHubNpmPackages() {
 					).toString();
 					const packageJson = JSON.parse(content);
 
-					// Check if it's an NPM package (has name and not marked as private)
+					// First check if it has a name and is not private
 					if (packageJson.name && !packageJson.private) {
-						console.log(
-							`Found new NPM package: ${packageJson.name} in repo ${repo.name}`,
-						);
-						// Add to cache
-						packageMap[repo.name] = packageJson.name;
-						// Add to our list if not already there
-						if (!cachedPackageNames.includes(packageJson.name)) {
-							cachedPackageNames.push(packageJson.name);
+						// Now check if .npmignore exists - required to be considered an npm package
+						let hasNpmIgnore = false;
+						try {
+							await axios.get(
+								`https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/contents/.npmignore`,
+							);
+							hasNpmIgnore = true;
+							console.log(`Found .npmignore file in repo ${repo.name}`);
+
+							// Only add to the package map if it has BOTH valid package.json AND .npmignore
+							console.log(
+								`Found valid NPM package: ${packageJson.name} in repo ${repo.name} (with .npmignore)`,
+							);
+							// Add to cache
+							repositoriesCache[repo.name] = {
+								type: CACHE_TYPES.NPM,
+								id: packageJson.name,
+							};
+							// Add to our list if not already there
+							if (!cachedPackageNames.includes(packageJson.name)) {
+								cachedPackageNames.push(packageJson.name);
+							}
+						} catch (npmIgnoreError) {
+							// .npmignore doesn't exist, so it's not considered an npm package
+							if (
+								npmIgnoreError.response &&
+								npmIgnoreError.response.status === 404
+							) {
+								console.log(
+									`No .npmignore found in repo ${repo.name}, not considering it as an npm package`,
+								);
+								// Mark as not an NPM package in cache
+								repositoriesCache[repo.name] = {
+									type: CACHE_TYPES.NPM,
+									id: null,
+								};
+							}
 						}
 					} else {
 						// Mark as not an NPM package in cache
-						packageMap[repo.name] = null;
+						repositoriesCache[repo.name] = {
+							type: CACHE_TYPES.NPM,
+							id: null,
+						};
 					}
 				} catch (error) {
 					// Check the HTTP status code from the error response
@@ -149,15 +156,15 @@ async function fetchGitHubNpmPackages() {
 			}
 
 			// Update the cache
-			cache.repositories = packageMap;
+			cache.repositories = repositoriesCache;
 			cache.lastUpdated = new Date().toISOString();
-			savePackageCache(cache);
+			saveSharedCache(cache);
 		}
 
 		// Filter out any null values and get just the package names
-		const packageNames = Object.values(packageMap).filter(
-			(name) => name !== null,
-		);
+		const packageNames = Object.values(repositoriesCache)
+			.filter((repo) => repo.type === CACHE_TYPES.NPM && repo.id !== null)
+			.map((repo) => repo.id);
 
 		console.log(`Found ${packageNames.length} NPM packages total`);
 		return packageNames.length > 0 ? packageNames : FALLBACK_PACKAGES;
@@ -166,10 +173,12 @@ async function fetchGitHubNpmPackages() {
 		console.log("Falling back to cached package list or hardcoded list");
 
 		// Try to read from cache again
-		const cache = loadPackageCache();
-		const cachedNames = Object.values(cache.repositories || {}).filter(
-			(name) => name !== null,
-		);
+		const cache = loadSharedCache();
+		const cachedNames = Object.values(cache.repositories || {})
+			.filter(
+				(repo) => repo && repo.type === CACHE_TYPES.NPM && repo.id !== null,
+			)
+			.map((repo) => repo.id);
 
 		return cachedNames.length > 0 ? cachedNames : FALLBACK_PACKAGES;
 	}
