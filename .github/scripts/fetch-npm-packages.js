@@ -5,7 +5,6 @@ import axios from "axios";
 import {
 	CACHE_TYPES,
 	loadSharedCache,
-	saveSharedCache,
 	updateRepositoryCache,
 } from "./shared/cache-utils.js";
 

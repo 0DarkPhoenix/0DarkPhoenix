@@ -5,7 +5,7 @@ import axios from "axios";
 import {
 	CACHE_TYPES,
 	loadSharedCache,
-	saveSharedCache,
+	updateRepositoryCache,
 } from "./shared/cache-utils.js";
 
 // Get current file's directory in ES modules

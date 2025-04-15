@@ -2,7 +2,7 @@ name: Update Extension Downloads
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Run every day at 03:00 UTC
+    - cron: '0 5 * * *'  # Run every day at 05:00 UTC
   workflow_dispatch:  # Allow manual triggering
 
 jobs:
@@ -16,12 +16,12 @@ jobs:
         with:
           node-version: '16'
       
-      # Restore the cache of the previous run
+      # Restore the cache of the previous run but don't save yet
       - name: Restore cache
         uses: actions/cache@v3
         with:
           path: .cache
-          key: ${{ runner.os }}-project-cache-v1
+          key: ${{ runner.os }}-project-cache-${{ github.run_id }}
           restore-keys: |
             ${{ runner.os }}-project-cache-
       
@@ -42,6 +42,13 @@ jobs:
         run: node .github/scripts/fetch-npm-packages.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      # Save a new cache with a unique ID (github.run_id) and timestamp
+      - name: Save updated cache
+        uses: actions/cache/save@v3
+        with:
+          path: .cache
+          key: ${{ runner.os }}-project-cache-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}-${{ github.sha }}
       
       - name: Commit and push if changed
         run: |
