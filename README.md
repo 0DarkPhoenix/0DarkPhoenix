@@ -7,10 +7,12 @@
 ### [NPM packages](https://www.npmjs.com/~dark_phoenix_) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![NPM Packages](https://img.shields.io/badge/dynamic/json?color=CB3837&label=Packages&query=npm.packages&url=https://raw.githubusercontent.com/0DarkPhoenix/0DarkPhoenix/main/shields/downloads.json&style=for-the-badge) ![NPM Downloads](https://img.shields.io/badge/dynamic/json?color=CB3837&label=Total%20Downloads&query=npm.downloads&url=https://raw.githubusercontent.com/0DarkPhoenix/0DarkPhoenix/main/shields/downloads.json&style=for-the-badge)
 
-### [Fibonacci Sequence Calculator](https://github.com/0DarkPhoenix/fibonacci_sequence) ![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
-
 ### [Modrinth](https://modrinth.com/user/dark_phoenix_) ![Modrinth Badge](https://img.shields.io/badge/Modrinth-00AF5C?logo=modrinth&logoColor=fff&style=for-the-badge)
 ![Modrinth Projects](https://img.shields.io/badge/dynamic/json?color=00AF5C&label=Projects&query=modrinth.projects&url=https://raw.githubusercontent.com/0DarkPhoenix/0DarkPhoenix/main/shields/downloads.json&style=for-the-badge) ![Modrinth Downloads](https://img.shields.io/badge/dynamic/json?color=00AF5C&label=Total%20Downloads&query=modrinth.downloads&url=https://raw.githubusercontent.com/0DarkPhoenix/0DarkPhoenix/main/shields/downloads.json&style=for-the-badge)
+
+### [Fibonacci Sequence Calculator](https://github.com/0DarkPhoenix/fibonacci_sequence) ![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
+
+### [Add Logo Processor](https://github.com/0DarkPhoenix/Add-Logo-Processor) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
 ### [Galaxy Life Notifier](https://github.com/0DarkPhoenix/Galaxy-Life-Notifier) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 <br>
