@@ -1,6 +1,6 @@
 # Projects
 
-### [VS Code Extensions](https://marketplace.visualstudio.com/manage/publishers/DarkPhoenix) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 
+### [VS Code Extensions](https://marketplace.visualstudio.com/publishers/DarkPhoenix) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 
 ![VS Marketplace Extensions](https://img.shields.io/badge/dynamic/json?color=0078d7&label=Extensions&query=vsmarketplace.extensions&url=https://raw.githubusercontent.com/0DarkPhoenix/0DarkPhoenix/main/shields/downloads.json&style=for-the-badge) ![VS Marketplace Installs](https://img.shields.io/badge/dynamic/json?color=0078d7&label=Total%20Installs&query=vsmarketplace.installs&url=https://raw.githubusercontent.com/0DarkPhoenix/0DarkPhoenix/main/shields/downloads.json&style=for-the-badge) ![VS Marketplace Downloads](https://img.shields.io/badge/dynamic/json?color=0078d7&label=Total%20Downloads&query=vsmarketplace.downloads&url=https://raw.githubusercontent.com/0DarkPhoenix/0DarkPhoenix/main/shields/downloads.json&style=for-the-badge)
 
 
