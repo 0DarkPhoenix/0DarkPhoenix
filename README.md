@@ -19,8 +19,10 @@
 ### [Galaxy Life Notifier](https://github.com/0DarkPhoenix/Galaxy-Life-Notifier) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 <br>
 
+<!--
 ## Github Projects Languages
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=0DarkPhoenix&theme=github_dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact&card_width=400&langs_count=9)
+-->
 
 # Experience
 ## Frontend
