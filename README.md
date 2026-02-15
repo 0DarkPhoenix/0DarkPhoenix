@@ -20,6 +20,9 @@
 <br>
 
 <!--
+The code below stopped working because the general vercel deployment of github-readme-stats stopped working
+Look for a more local alternative which generates an image: https://github.com/levvolkov/github_stats?tab=readme-ov-file
+
 ## Github Projects Languages
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=0DarkPhoenix&theme=github_dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact&card_width=400&langs_count=9)
 -->
