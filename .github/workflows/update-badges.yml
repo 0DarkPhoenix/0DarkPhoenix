@@ -1,21 +1,21 @@
-name: Update Extension Downloads
+name: Update Profile Stats
 
 on:
   schedule:
-    - cron: '0 7 * * *'  # Run every day at 07:00 UTC
-  workflow_dispatch:  # Allow manual triggering
+    - cron: "0 7 * * *" # Run every day at 07:00 UTC
+  workflow_dispatch: # Allow manual triggering
 
 jobs:
   update-downloads:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
-      
+          node-version: "18"
+
       # Restore the cache of the previous run but don't save yet
       - name: Restore cache
         uses: actions/cache@v3
@@ -24,7 +24,7 @@ jobs:
           key: ${{ runner.os }}-project-cache-${{ github.run_id }}
           restore-keys: |
             ${{ runner.os }}-project-cache-
-      
+
       - name: Install dependencies
         run: npm install axios
 
@@ -32,7 +32,7 @@ jobs:
         run: node .github/scripts/fetch-visual-studio-marketplace-projects.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Fetch and update Modrinth badges
         run: node .github/scripts/fetch-modrinth-projects.js
         env:
@@ -42,17 +42,77 @@ jobs:
         run: node .github/scripts/fetch-npm-packages.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
       # Save a new cache with a unique ID (github.run_id) and timestamp
       - name: Save updated cache
         uses: actions/cache/save@v3
         with:
           path: .cache
           key: ${{ runner.os }}-project-cache-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}-${{ github.sha }}
-      
+
       - name: Commit and push if changed
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git add shields/downloads.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update badges" && git push)
+  update-stats:
+    # update-stats job from https://github.com/levvolkov/github_stats
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate GitHub stats SVG
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
+          EXCLUDED_REPOS: ${{ secrets.EXCLUDED_REPOS }}
+        run: |
+          node src/generators/stats_commits.js
+          node src/generators/stats_general.js
+          node src/generators/stats_langs.js
+          node src/generators/stats_visitors.js
+
+      - name: Setup Git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Switch to the main branch
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull origin main
+
+      - name: Indexing and adding SVG
+        run: |
+          git add output/*.svg
+
+      - name: Commit and push updated SVG
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            git commit -m "chore: update GitHub stats SVG (manual run)" --allow-empty
+            git push origin main
+          else
+            if git diff --cached --quiet; then
+              echo "No changes found, commit skipped."
+            else
+              git commit -m "chore: update GitHub stats SVG"
+              git push origin main
+            fi
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

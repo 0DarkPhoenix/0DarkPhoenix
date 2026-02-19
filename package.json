@@ -1,7 +1,8 @@
 {
 	"dependencies": {
 		"@vercel/node": "^5.1.14",
-		"axios": "^1.8.4"
+		"axios": "^1.8.4",
+		"handlebars": "^4.7.8"
 	},
 	"name": "0darkphoenix",
 	"version": "1.0.0",
@@ -9,7 +10,12 @@
 	"main": "index.js",
 	"devDependencies": {},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node src/generators/stats_commits.js & node src/generators/stats_general.js & node src/generators/stats_langs.js & node src/generators/stats_visitors.js",
+		"generate:commits": "node src/generators/stats_commits.js",
+		"generate:general": "node src/generators/stats_general.js",
+		"generate:langs": "node src/generators/stats_langs.js",
+		"generate:visitors": "node src/generators/stats_visitors.js"
 	},
 	"repository": {
 		"type": "git",
