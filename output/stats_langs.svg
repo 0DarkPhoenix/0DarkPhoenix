@@ -323,27 +323,27 @@
           <div>
             <span class="progress">
               <span class="progress-item"
-                style="--final-width: 46.72344080981101%; --color: #41b883; --delay: 0.85s;"></span>
+                style="--final-width: 46.726228956057%; --color: #41b883; --delay: 0.85s;"></span>
               <span class="progress-item"
-                style="--final-width: 36.17335752738966%; --color: #3178c6; --delay: 1.05s;"></span>
+                style="--final-width: 36.17551611436971%; --color: #3178c6; --delay: 1.05s;"></span>
               <span class="progress-item"
-                style="--final-width: 6.000419839090352%; --color: #dea584; --delay: 1.26s;"></span>
+                style="--final-width: 6.000777904501605%; --color: #dea584; --delay: 1.26s;"></span>
               <span class="progress-item"
-                style="--final-width: 5.067017016384744%; --color: #f1e05a; --delay: 1.46s;"></span>
+                style="--final-width: 5.0613520431820325%; --color: #f1e05a; --delay: 1.46s;"></span>
               <span class="progress-item"
-                style="--final-width: 4.8228545133911735%; --color: #3572A5; --delay: 1.67s;"></span>
+                style="--final-width: 4.8231423094839565%; --color: #3572A5; --delay: 1.67s;"></span>
               <span class="progress-item"
-                style="--final-width: 1.0078019649652075%; --color: #f7931e; --delay: 1.88s;"></span>
+                style="--final-width: 1.007862103927934%; --color: #f7931e; --delay: 1.88s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.053971632101617185%; --color: #e34c26; --delay: 2.08s;"></span>
+                style="--final-width: 0.05397485277203071%; --color: #e34c26; --delay: 2.08s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.05098814048643815%; --color: #ff3670; --delay: 2.28s;"></span>
+                style="--final-width: 0.05099118312178398%; --color: #ff3670; --delay: 2.28s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.031205709596602366%; --color: #7e7eff; --delay: 2.49s;"></span>
+                style="--final-width: 0.03120757174717512%; --color: #7e7eff; --delay: 2.49s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.03023809069438214%; --color: #663399; --delay: 2.69s;"></span>
+                style="--final-width: 0.030239895103851867%; --color: #663399; --delay: 2.69s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.02136825075736338%; --color: #384d54; --delay: 2.90s;"></span>
+                style="--final-width: 0.02136952587338865%; --color: #384d54; --delay: 2.90s;"></span>
             </span>
           </div>
           <ul>
@@ -353,7 +353,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
               </svg>
               <span class="lang">Vue</span>
-              <span class="percent">46.72%</span>
+              <span class="percent">46.73%</span>
             </li>
             <li style="--li-delay: 1.05s;">
               <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3178c6;" viewBox="0 0 16 16"
@@ -361,7 +361,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
               </svg>
               <span class="lang">TypeScript</span>
-              <span class="percent">36.17%</span>
+              <span class="percent">36.18%</span>
             </li>
             <li style="--li-delay: 1.26s;">
               <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#dea584;" viewBox="0 0 16 16"
@@ -377,7 +377,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
               </svg>
               <span class="lang">JavaScript</span>
-              <span class="percent">5.07%</span>
+              <span class="percent">5.06%</span>
             </li>
             <li style="--li-delay: 1.67s;">
               <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3572A5;" viewBox="0 0 16 16"
