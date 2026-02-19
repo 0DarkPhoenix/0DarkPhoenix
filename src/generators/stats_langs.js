@@ -53,6 +53,7 @@ async function fetchTopLanguages() {
         repositories(first: 100, ownerAffiliations: OWNER) {
           nodes {
             nameWithOwner
+            isFork
             languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
               edges {
                 size
