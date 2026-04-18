@@ -323,25 +323,25 @@
           <div>
             <span class="progress">
               <span class="progress-item"
-                style="--final-width: 28.639567925387592%; --color: #dea584; --delay: 0.85s;"></span>
+                style="--final-width: 28.63038557477124%; --color: #dea584; --delay: 0.85s;"></span>
               <span class="progress-item"
-                style="--final-width: 24.769626488944766%; --color: #3178c6; --delay: 1.08s;"></span>
+                style="--final-width: 24.76168490981026%; --color: #3178c6; --delay: 1.08s;"></span>
               <span class="progress-item"
-                style="--final-width: 23.019134183028754%; --color: #3572A5; --delay: 1.31s;"></span>
+                style="--final-width: 23.01175384260239%; --color: #3572A5; --delay: 1.31s;"></span>
               <span class="progress-item"
-                style="--final-width: 11.649208782609254%; --color: #f1e05a; --delay: 1.53s;"></span>
+                style="--final-width: 11.64547384080693%; --color: #f1e05a; --delay: 1.53s;"></span>
               <span class="progress-item"
-                style="--final-width: 5.148718080295576%; --color: #0096D8; --delay: 1.76s;"></span>
+                style="--final-width: 5.147067310466883%; --color: #0096D8; --delay: 1.76s;"></span>
               <span class="progress-item"
-                style="--final-width: 4.810165555904784%; --color: #f7931e; --delay: 1.99s;"></span>
+                style="--final-width: 4.808623331986739%; --color: #f7931e; --delay: 1.99s;"></span>
               <span class="progress-item"
-                style="--final-width: 1.5113631261265308%; --color: #000080; --delay: 2.22s;"></span>
+                style="--final-width: 1.5429403202328968%; --color: #000080; --delay: 2.22s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.24336268994669627%; --color: #ff3670; --delay: 2.44s;"></span>
+                style="--final-width: 0.24328466357591266%; --color: #ff3670; --delay: 2.44s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.14432420990513087%; --color: #663399; --delay: 2.67s;"></span>
+                style="--final-width: 0.14427793701787123%; --color: #663399; --delay: 2.67s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.0645289578509163%; --color: #e34c26; --delay: 2.90s;"></span>
+                style="--final-width: 0.06450826872887931%; --color: #e34c26; --delay: 2.90s;"></span>
             </span>
           </div>
           <ul>
@@ -351,7 +351,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
               </svg>
               <span class="lang">Rust</span>
-              <span class="percent">28.64%</span>
+              <span class="percent">28.63%</span>
             </li>
             <li style="--li-delay: 1.08s;">
               <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3178c6;" viewBox="0 0 16 16"
@@ -359,7 +359,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
               </svg>
               <span class="lang">TypeScript</span>
-              <span class="percent">24.77%</span>
+              <span class="percent">24.76%</span>
             </li>
             <li style="--li-delay: 1.31s;">
               <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#3572A5;" viewBox="0 0 16 16"
@@ -367,7 +367,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
               </svg>
               <span class="lang">Python</span>
-              <span class="percent">23.02%</span>
+              <span class="percent">23.01%</span>
             </li>
             <li style="--li-delay: 1.53s;">
               <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#f1e05a;" viewBox="0 0 16 16"
@@ -399,7 +399,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
               </svg>
               <span class="lang">Lua</span>
-              <span class="percent">1.51%</span>
+              <span class="percent">1.54%</span>
             </li>
             <li style="--li-delay: 2.44s;">
               <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#ff3670;" viewBox="0 0 16 16"
