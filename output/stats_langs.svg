@@ -323,27 +323,27 @@
           <div>
             <span class="progress">
               <span class="progress-item"
-                style="--final-width: 69.56135547534153%; --color: #e38c00; --delay: 0.85s;"></span>
+                style="--final-width: 69.55367515544924%; --color: #e38c00; --delay: 0.85s;"></span>
               <span class="progress-item"
-                style="--final-width: 7.22910683401298%; --color: #dea584; --delay: 1.05s;"></span>
+                style="--final-width: 7.228308663065312%; --color: #dea584; --delay: 1.05s;"></span>
               <span class="progress-item"
-                style="--final-width: 6.252268770034393%; --color: #3178c6; --delay: 1.26s;"></span>
+                style="--final-width: 6.251578452488419%; --color: #3178c6; --delay: 1.26s;"></span>
               <span class="progress-item"
-                style="--final-width: 5.810415180463757%; --color: #3572A5; --delay: 1.46s;"></span>
+                style="--final-width: 5.809773648294235%; --color: #3572A5; --delay: 1.46s;"></span>
               <span class="progress-item"
-                style="--final-width: 2.9404554929249995%; --color: #f1e05a; --delay: 1.67s;"></span>
+                style="--final-width: 2.9401308350936453%; --color: #f1e05a; --delay: 1.67s;"></span>
               <span class="progress-item"
-                style="--final-width: 2.8141977321528553%; --color: #e34c26; --delay: 1.88s;"></span>
+                style="--final-width: 2.8138870145327717%; --color: #e34c26; --delay: 1.88s;"></span>
               <span class="progress-item"
-                style="--final-width: 1.6685518438846587%; --color: #4F5D95; --delay: 2.08s;"></span>
+                style="--final-width: 1.6794086906518055%; --color: #4F5D95; --delay: 2.08s;"></span>
               <span class="progress-item"
-                style="--final-width: 1.2996227162937275%; --color: #0096D8; --delay: 2.28s;"></span>
+                style="--final-width: 1.2994792240036162%; --color: #0096D8; --delay: 2.28s;"></span>
               <span class="progress-item"
-                style="--final-width: 1.2141663862917556%; --color: #f7931e; --delay: 2.49s;"></span>
+                style="--final-width: 1.2140323292972437%; --color: #f7931e; --delay: 2.49s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.6755875001254806%; --color: #000080; --delay: 2.69s;"></span>
+                style="--final-width: 0.6755129080178263%; --color: #000080; --delay: 2.69s;"></span>
               <span class="progress-item"
-                style="--final-width: 0.372523539349256%; --color: #663399; --delay: 2.90s;"></span>
+                style="--final-width: 0.3724824087541137%; --color: #663399; --delay: 2.90s;"></span>
             </span>
           </div>
           <ul>
@@ -353,7 +353,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
               </svg>
               <span class="lang">TSQL</span>
-              <span class="percent">69.56%</span>
+              <span class="percent">69.55%</span>
             </li>
             <li style="--li-delay: 1.05s;">
               <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#dea584;" viewBox="0 0 16 16"
@@ -401,7 +401,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
               </svg>
               <span class="lang">PHP</span>
-              <span class="percent">1.67%</span>
+              <span class="percent">1.68%</span>
             </li>
             <li style="--li-delay: 2.28s;">
               <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:#0096D8;" viewBox="0 0 16 16"
