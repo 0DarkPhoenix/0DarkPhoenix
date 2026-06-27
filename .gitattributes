@@ -1,0 +1,2 @@
+# Excluded languages from GitHub language detection
+*.hbs linguist-vendored
