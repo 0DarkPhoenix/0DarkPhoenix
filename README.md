@@ -26,10 +26,14 @@ The code below stopped working because the general vercel deployment of github-r
 Look for a more local alternative which generates an image: https://github.com/levvolkov/github_stats?tab=readme-ov-file
 
 Update 27-6-2026: Vercel deployment is live again. The local alternative will be kept in the background, but should be properly fixed to start using it here.
+Update 27-6-2026: Migrated from github-readme-stats to github-stats-extended, and implemented Github Action for generating stats cards
 -->
 
 ## Github Projects Languages
+![Top Languages](./profile/top-langs.svg)
+<!--
 ![](https://github-stats-extended.vercel.app/api/top-langs/?username=0DarkPhoenix&theme=github_dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact&card_width=400&langs_count=9)
+-->
 
 # Experience
 ## Frontend
