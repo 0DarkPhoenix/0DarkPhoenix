@@ -29,7 +29,7 @@ Update 27-6-2026: Vercel deployment is live again. The local alternative will be
 -->
 
 ## Github Projects Languages
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=0DarkPhoenix&theme=github_dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact&card_width=400&langs_count=9)
+![](https://github-stats-extended.vercel.app/api/top-langs/?username=0DarkPhoenix&theme=github_dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact&card_width=400&langs_count=9)
 
 # Experience
 ## Frontend
