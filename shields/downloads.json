@@ -1,15 +1,15 @@
 {
   "vsmarketplace": {
     "extensions": 9,
-    "installs": 7068,
-    "downloads": 8802
+    "installs": 7077,
+    "downloads": 8811
   },
   "modrinth": {
     "projects": 9,
-    "downloads": 380677
+    "downloads": 381835
   },
   "npm": {
     "packages": 1,
-    "downloads": 2108
+    "downloads": 2109
   }
 }
